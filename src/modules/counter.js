@@ -1,25 +1,24 @@
-// ¾×¼Ç Å¸ÀÔ
+import {createAction , handleActions} from 'redux-actions';
+
+// ì•¡ì…˜ íƒ€ì…
 const INCREASE = 'counter/INCREASE';
 const DECREASE = 'counter/DECREASE';
 
-//¾×¼Ç »ı¼º ÇÔ¼ö
-export const inscrease = () => ({ type: INCREASE });
-export const decrease = () => ({ type: DECREASE });
+//ì•¡ì…˜ ìƒì„± í•¨ìˆ˜
+export const increase = createAction(INCREASE);
+export const decrease = createAction(DECREASE);
 
-//ÃÊ±â»óÅÂ ¹× ¸®µà¼­ ÇÔ¼ö
+//ì´ˆê¸°ìƒíƒœ ë° ë¦¬ë“€ì„œ í•¨ìˆ˜
 const initialState = {
   number: 0,
 };
 
-function counter(state = initialState, action) {
-  switch (action.type) {
-    case INCREASE:
-      return { number: state.number + 1 };
-    case DECREASE:
-      return { number: state.number - 1 };
-    default:
-      return state;
-  }
-}
+const counter = handleActions(
+  {
+    [INCREASE] :(state, action) =>({ number: state.number + 1}),
+    [DECREASE] :(state, action) =>({ number: state.number - 1}),
+  },
+  initialState
+);
 
 export default counter;
